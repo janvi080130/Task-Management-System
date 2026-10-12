@@ -3,12 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Project extends Model
 {
-    public function projects() { return $this->hasMany(Project::class, 'created_by'); }
-    public function assignedTasks() { return $this->hasMany(Task::class, 'assigned_to'); }
-    public function createdTasks() { return $this->hasMany(Task::class, 'created_by'); }
+    protected $fillable = ['name', 'description', 'created_by'];
 
-    public function isAdmin() { return $this->role === 'admin'; }
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
 }

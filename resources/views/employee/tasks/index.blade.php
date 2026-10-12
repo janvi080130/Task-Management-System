@@ -1,0 +1,1 @@
+<x-app-layout><x-slot name="header"><h1 class="text-2xl font-semibold">My tasks</h1></x-slot><div class="mx-auto max-w-7xl px-4 py-8"><div class="rounded-xl bg-white p-6 shadow-sm">@include('shared.task-table',['tasks'=>$tasks,'admin'=>false])<div class="mt-5">{{ $tasks->links() }}</div></div></div></x-app-layout>
